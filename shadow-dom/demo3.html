@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+  body{
+    font-family: "RobotoDraft",Helvetica,Arial,sans-serif;
+  }
+  .flip .back, .flip .front{
+    width: 350px;
+    height: 150px;
+    position: relative;
+    margin: 50px auto;
+    background-color:black;
+    color:white;
+    cursor: pointer;
+  }
+  .flip .card .back, .flip .flipped .front{
+    display: none;
+  }
+  .flip .flipped .back{
+    display:block;
+  }
+  .front h1{
+    margin: 0;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 10px;
+  }
+  .bio-img{
+    width:65px;
+    float:left;
+  }
+  .bio-details{
+    float:left;
+    margin:0;
+    padding:0;
+    list-style-type: none;
+  }
+  .padding{
+    padding:10px;
+  }
+  .padding-left{
+    padding-left: 10px;
+  }
+  .back-inner{
+    margin-top: 40px;
+    font-size:12px;
+  }
+  .bio-details li span{
+    float:left;
+  }
+  .bio-details li span:nth-child(1){
+    width:50px;
+    text-align: right;
+    padding-right:5px;
+  }
+  .bio-details li{
+    clear:both;
+  }
+  .padding-top{
+    padding-top: 10px;
+  }
+  .clearfix{
+    clear:both;
+  }
+</style>
+</head>
+<body>
+
+<div class="flip">
+   <div class="card">
+      <div class="face front padding">
+         <h1>Bill Stavroulakis</h1>
+      </div>
+      <div class="face back padding">
+        <div class="back-inner">
+         <img class="bio-img" src="http://bstavroulakis.com/blog/wp-content/themes/bstavrou/images/200x200.jpg"/>
+         <ul class="bio-details padding-left padding-top">
+            <li>
+               <span>Email:</span>
+               <span>bstavroulakis@gmail.com</span>
+            </li>
+            <li>
+               <span>Phone:</span>
+               <span>+30 000 000 0000</span>
+            </li>
+            <li>
+               <span>Blog:</span>
+               <span>http://bstavroulakis.com/blog/</span>
+            </li>
+         </ul>
+         <div class="clearfix"></div>
+       </div>
+      </div>
+   </div>
+</div>
+
+<script>
+    document.querySelector('.front').onclick = function(){
+        document.querySelector('.card').className  = 'card flipped';
+    };
+    document.querySelector('.back').onmouseleave = function(){
+        document.querySelector('.card').className  = 'card';
+      };
+      document.querySelector('.back').onclick = function(){
+        document.querySelector('.card').className  = 'card';
+      };
+</script>
+
+</body>
+
+</html>

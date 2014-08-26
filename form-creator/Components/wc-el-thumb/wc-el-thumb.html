@@ -1,0 +1,51 @@
+﻿<polymer-element name="wc-el-thumb" attributes="icon">
+    <template>
+        <style>
+            .thumb
+            {
+                border: 1px solid #343434;
+                cursor:pointer;
+            }
+            .thumb_text span{
+                display:inline-block;
+                vertical-align:middle;
+            }
+            .wc_icon_wrap {
+                background-color: #cfcfcf;
+            }
+            .thumb_text
+            {
+                vertical-align:middle;
+                color:#ffffff;
+            }
+            wc-icon {
+                vertical-align:middle;
+            }
+        </style>
+        <div class="thumb">
+            <div class="padding_small left wc_icon_wrap"></div>
+            <div class="padding_small thumb_text">
+                <span class="padding_left"><content></content></span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-el-thumb', {
+                icon: "",
+                ready: function () {
+                    var self = this;
+                    self.shadowRoot.querySelector(".wc_icon_wrap").innerHTML = "<wc-icon icon='" + self.icon + "'></wc-icon>";
+                    setTimeout(function () {
+                        var totalHeight = self.shadowRoot.querySelector(".thumb").offsetHeight;
+                        self.shadowRoot.querySelector(".thumb_text").style.height = (totalHeight - 2) + "px";
+                        self.shadowRoot.querySelector(".thumb_text").style.lineHeight = (totalHeight - 2 - 10) + "px";
+                        self.shadowRoot.querySelector(".wc_icon_wrap").style.height = (totalHeight - 2) + "px";
+                        self.shadowRoot.querySelector(".thumb_text > span").style.lineHeight = "14px";
+                    }, 0)
+                }
+            })
+        })();
+    </script>
+</polymer-element>

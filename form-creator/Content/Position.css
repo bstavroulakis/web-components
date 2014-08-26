@@ -1,0 +1,94 @@
+﻿padding_0 {
+    padding: 0;
+}
+
+::shadow .margin_0, .margin_0 {
+    margin: 0;
+}
+
+::shadow .padding, .padding
+{
+    padding:10px;
+}
+
+::shadow .padding_top, .padding_top
+{
+    padding-top:10px;
+}
+
+::shadow .padding_right, .padding_right {
+    padding-right:10px;
+}
+
+::shadow .padding_bottom, .padding_bottom
+{
+    padding-bottom:10px;
+}
+
+::shadow .padding_left, html /deep/ .padding_left
+{
+    padding-left:10px;
+}
+
+::shadow .padding_small, .padding_small
+{
+    padding:5px;
+}
+
+::shadow .padding_small_top, .padding_small_top
+{
+    padding-top:5px;
+}
+
+::shadow .padding_small_right, .padding_small_right {
+    padding-right:5px;
+}
+
+::shadow .padding_small_bottom, .padding_small_bottom
+{
+    padding-bottom:5px;
+}
+
+::shadow .padding_small_left, .padding_small_left
+{
+    padding-left:5px;
+}
+
+
+::shadow .padding_lr, .padding_lr
+{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+::shadow .left, .left, html /deep/ .left
+{
+    float: left;
+}
+
+::shadow .right, .right, html /deep/ .right
+{
+    float: right;
+}
+
+::shadow .clearfix, .clearfix, html /deep/ .clearfix
+{
+    clear:both;
+}
+
+html /deep/ .full_width {
+    width: 100%;
+}
+
+html /deep/ .fancy {
+    border: 2px solid #454545;
+    padding: 5px;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+html /deep/ .margin_top
+{
+    margin-top:10px;
+}

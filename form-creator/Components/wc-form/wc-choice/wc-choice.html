@@ -1,0 +1,51 @@
+﻿<link rel="import" href="../wc-form-element.html" />
+
+<polymer-element name="wc-choice" extends="wc-form-element" attributes="description, options, question, editMode, isMultiple, pIndex">
+    <template>
+        <style>
+            .icon_remove,.icon_add
+            {
+                cursor:pointer;
+            }
+        </style>
+        <wc-edit-field editMode="{{editMode}}" text="{{question}}"></wc-edit-field><div class="left padding_left">:</div>
+        <div class="clearfix"></div>
+        <template repeat="{{option, index in options}}">
+            <div data-index="{{index}}">
+                <template if="{{isMultiple}}">
+                    <input name="choice" value="{{option.title}}" class="left" type="checkbox" /><div class="left"><wc-edit-field editMode="{{editMode}}" text="{{option.title}}"></wc-edit-field> </div>
+                </template>
+                <template if="{{!isMultiple}}">
+                    <input name="choice" value="{{option.title}}" class="left" type="radio" /><div class="left"><wc-edit-field editMode="{{editMode}}" text="{{option.title}}"></wc-edit-field> </div>
+                </template>
+                <template if="{{editMode}}">
+                    <wc-icon on-click="{{removeElement}}" color="#afafaf" size="12" class="icon_remove left padding_left" icon="icon-remove"></wc-icon>
+                </template>
+            </div>
+            <div class="clearfix"></div>
+        </template>
+        <template if="{{editMode}}">
+            <wc-icon on-click="{{addOption}}" id="icon_add" class="pointer" icon="icon-add" size="16"></wc-icon>
+        </template>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-choice', {
+                isMultiple:false,
+                removeElement: function (event, detail, sender) {
+                    var self = this;
+                    var parent = sender.parentNode;
+                    for (var i in self.options) {
+                        if (parent.getAttribute("data-index") == i)
+                            self.options.splice(i, 1);
+                    }
+                },
+                addOption: function () {
+                    var self = this;
+                    if (self.editMode)
+                        self.options.push({ title: "" });
+                }
+            });
+        })();
+    </script>
+</polymer-element>

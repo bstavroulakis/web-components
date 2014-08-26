@@ -1,0 +1,39 @@
+﻿<link rel="import" href="../wc-iconset/wc-iconset.html" />
+
+<polymer-element name="wc-icon" attributes="size icon color">
+
+    <template>
+        <style>
+            .icon {
+                vertical-align:middle;
+                width:22px;
+                height:22px;
+            }
+        </style>
+        <wc-iconset id="iconset" style="display:none"></wc-iconset>
+        <div class="icon" ></div>
+    </template>
+
+    <script>
+        (function () {
+            Polymer('wc-icon', {
+                icon: '',
+                size: 22,
+                color: "#000000",
+                ready: function () {
+                    var self = this;
+                    if (this.icon == '')
+                        return;
+                    var path = self.$.iconset.shadowRoot.querySelector("#" + self.icon);
+                    var wrap = document.createElement('div');
+                    wrap.appendChild(path.cloneNode(true));
+                    self.shadowRoot.querySelector(".icon").innerHTML = "<svg viewBox='0 0 32 32'>" + wrap.innerHTML + "</svg>";
+                    self.shadowRoot.querySelector(".icon").style.width = self.size + "px";
+                    self.shadowRoot.querySelector(".icon").style.height = self.size + "px";
+                    self.shadowRoot.querySelector(".icon").style.fill = self.color;
+                }
+            });
+        })();
+    </script>
+
+</polymer-element>

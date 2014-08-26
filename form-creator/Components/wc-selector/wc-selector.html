@@ -1,0 +1,27 @@
+﻿<polymer-element name="wc-selector" attributes="selected">
+    <template>
+        <content id="items" select="*"></content>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-selector', {
+                selected: null,
+                ready: function () {
+                    var self = this;
+                    setTimeout(function () {
+                        var elements = self.children;
+                        for (var key in elements) {
+                            var element = elements[key];
+                            if (element == null || typeof(element) != "object")
+                                continue;
+                            element.addEventListener('up', function (inEvent) {
+                                selected = this;
+                                self.fire('wc-selected', this);
+                            });
+                        }
+                    }, 0);
+                }
+            })
+        })();
+    </script>
+</polymer-element>

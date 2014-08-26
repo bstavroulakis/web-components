@@ -1,0 +1,94 @@
+﻿<link rel="import" href="../wc-edit-field/wc-edit-field.html" />
+<link rel="import" href="../wc-form/wc-input/wc-input.html" />
+<link rel="import" href="../wc-form/wc-choice/wc-choice.html" />
+<link rel="import" href="../wc-form/wc-break/wc-break.html" />
+<link rel="import" href="../wc-form/wc-drop-down/wc-drop-down.html" />
+
+<polymer-element name="wc-form">
+
+    <template>
+        <style>
+            h1 {
+                margin: 0;
+                word-break: break-word;
+            }
+            ul,li 
+            {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+            .form_element
+            {
+                width: 100%;
+                border-bottom:1px solid #dfdfdf;
+                clear:both;
+                padding:10px;
+            }
+            .line
+            {
+                clear:both;
+                border-bottom:1px solid #dfdfdf;
+            }
+            .description
+            {
+                color:#999999;
+                font-style:italic;
+                margin-top:5px;
+                font-size:80%;
+            }
+            .icon_remove {
+                cursor:pointer;
+            }
+        </style>
+        <h1><wc-edit-field text="{{formTitle}}"></wc-edit-field></h1>
+        <div class="line"></div>
+        <ul id="form_elements">
+            <template repeat="{{el, elIndex in elements}}">
+                <li class="form_element" data-index="{{elIndex}}">
+                    <template if="{{(el.typeID == 1)}}">
+                        <wc-input pindex="{{elIndex}}" editMode="{{editMode}}" question="{{el.question}}" ></wc-input>
+                    </template>
+                    <template if="{{(el.typeID == 2)}}">
+                        <wc-choice pindex="{{elIndex}}" editMode="{{editMode}}" question="{{el.question}}" options="{{el.options}}"></wc-choice>
+                    </template>
+                    <template if="{{(el.typeID == 3)}}">
+                        <wc-choice pindex="{{elIndex}}"  isMultiple="true" editMode="{{editMode}}" question="{{el.question}}" options="{{el.options}}"></wc-choice>
+                    </template>
+                    <template if="{{el.typeID == 4}}">
+                        <wc-break editMode="{{editMode}}" question="{{el.question}}" ></wc-break>
+                    </template>
+                    <template if="{{el.typeID == 5}}">
+                        <wc-drop-down pindex="{{elIndex}}"  editMode="{{editMode}}" options="{{el.options}}"></wc-drop-down>
+                    </template>
+                    <div class="clearfix"></div>
+                    <span class="description"><wc-edit-field editMode="{{editMode}}" text="{{el.description}}"></wc-edit-field></span>
+                    <template if="{{editMode}}">
+                        <wc-icon on-click="{{removeElement}}}" color="#afafaf" size="12" class="icon_remove right" icon="icon-remove"></wc-icon>
+                    </template>
+                    <div class="clearfix margin_top"></div>
+                </li>
+            </template>
+        </ul>
+    </template>
+
+    <script>
+        (function () {
+            Polymer('wc-form', {
+                formTitle: "",
+                elements: [],
+                editMode:true,
+                removeElement: function (event, detail, sender) {
+                    var self = this;
+                    var parent = sender.parentNode;
+                    for (var i in self.elements) {
+                        if (parent.getAttribute("data-index") == i)
+                            self.elements.splice(i,1);
+                    }
+                },
+                ready: function () {
+                }
+            });
+        })();
+    </script>
+</polymer-element>

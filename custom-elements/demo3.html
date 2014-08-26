@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <style>
+.block img, .block-image{
+   float:left;
+}
+.clear{
+   clear:both;
+}
+</style>
+<link href="chat.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+   
+   var BubbleProto = Object.create(HTMLElement.prototype);
+   BubbleProto.attachedCallback = function(){
+      this.innerHTML = '<bubble-header>'+this.getAttribute("header")+'</bubble-header><bubble-main>'+this.getAttribute("main")+'</bubble-main>';
+   }
+   var ChatBubble = document.registerElement('chat-bubble', {
+     prototype: BubbleProto
+   });
+
+   var ChatProto = Object.create(HTMLElement.prototype);
+   ChatProto.attachedCallback = function () {
+      //alert('This will run when I append this element in the DOM tree');
+     var self = this;
+     this.querySelector('.send').addEventListener('click', function(e) {
+         var bubble = document.createElement("chat-bubble");
+         bubble.setAttribute("header","Bill");
+         bubble.setAttribute("main",self.querySelector('.send_inp').value);
+         self.querySelector('.send_inp').value = '';
+         self.querySelector('chat-body').appendChild(bubble);
+         self.querySelector('.send_inp').focus();
+     });
+   }
+   var SimpleChat = document.registerElement('simple-chat', {
+     prototype: ChatProto
+   });
+</script>
+
+</head>
+<body>
+
+   <simple-chat>
+      <chat-header>
+         <chat-h-img><img src="img.png"/></chat-h-img>
+         <chat-h-name>Bill</chat-h-name>
+      </chat-header>
+      <chat-body>
+         <chat-bubble header='Bill' main='Hey there!'></chat-bubble>
+         <chat-bubble header='John' main='Hi!'></chat-bubble>
+      </chat-body>
+      <chat-footer>
+         <div class="inp-wrapper">
+            <input type="" class="send_inp" />
+         </div>
+         <button class="send">Send</button>
+      </chat-footer>
+   </simple-chat>
+
+
+
+</body>
+
+</html>

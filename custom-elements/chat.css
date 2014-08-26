@@ -1,0 +1,131 @@
+simple-chat{
+	position:fixed;
+	bottom:0px;
+	right:10px;
+	width:220px;
+	background-color:#efefef;
+	font-family: Arial;
+	border-left:1px solid #000000;
+	border-right:1px solid #000000;
+} 
+
+chat-body{
+	margin-bottom:5px;
+	display: inline-block;
+}
+
+chat-footer {
+	background-color: #999999;
+	display: inline-block;
+	padding:10px 5px;
+}
+
+chat-footer button{
+	position: absolute;
+	right: 10px;
+	bottom: 7px;
+	background-color:#0072c6;
+}
+
+chat-footer input{
+	width:100%;
+}
+
+chat-footer .inp-wrapper{
+	padding-right:65px;
+	width:100%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	padding-left: 5px;
+}
+
+chat-footer button {
+	background-color:#062554;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #062554;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:arial;
+	font-size:12px;
+	padding:5px 8px;
+	text-decoration:none;
+}
+chat-footer button:hover {
+	background-color:#193d6d;
+}
+chat-footer button:active {
+	background-color: #0b2b5a;
+}
+
+chat-h-img img{
+	width:12px;
+}
+
+chat-header{
+	width:100%;
+	background-color:#062554;
+	display: inline-block;
+	padding:5px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	color:#ffffff;
+}
+
+chat-bubble 
+{
+	position: relative;
+	display: inline-block;
+	width: 180px;
+	height: 55px;
+	padding: 5px;
+	background: #0072c6;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-left:20px;
+	margin-top:10px;
+	color:#ffffff;
+	font-size:12px;
+}
+
+bubble-header{
+	width: 100%;
+	display: inline-block;
+	font-size: 17px;
+	
+}
+
+chat-bubble:nth-child(odd){
+	margin-right:10px;
+	margin-left:10px;
+}
+
+chat-bubble:after 
+{
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-color: transparent #0072c6;
+	display: block;
+	width: 0;
+	z-index: 1;
+	top: 17px;
+}
+
+chat-bubble:nth-child(even):after 
+{
+	border-width: 15px 15px 15px 0;
+	left: -15px;
+}
+
+
+chat-bubble:nth-child(odd):after 
+{
+	border-width: 15px 0 15px 15px;
+	right: -15px;
+}

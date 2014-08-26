@@ -1,0 +1,74 @@
+﻿<polymer-element name="wc-page">
+    <template>
+        <style>
+            #wc-wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0 auto 0px;
+                position: relative
+            }
+            #wc-header {
+                height: 48px;
+            }
+            #wc-content
+            {
+                height: 100%;
+            }
+            #wc-sidebar {
+                width: 300px;
+                position: absolute;
+                left: 0;
+                top: 48px;
+                bottom: 0px;
+            }
+            #wc-content {
+                margin-left: 302px
+            }
+            #wc-footer, #wc-footer a {
+                background-color:#232323;
+                color:#ffffff;
+            }
+
+            @media (max-width: 599px) {
+                #wc-sidebar {
+                    width: 100% !important;
+                    height:auto;
+                    position: relative;
+                    top:0 !important;
+                }
+                #wc-content
+                {
+                    margin-left:0;
+                    left:auto;
+                    width:100% !important;
+                    height:auto;
+                    position: relative;
+                    top:0 !important;
+                }
+            }
+        </style>
+        <div id="wc-wrapper">
+            <div id="wc-header" class="">
+                <content select="wc-header"></content>
+            </div>
+            <div id="wc-sidebar" class="black_light padding">
+                <wc-selection>
+                    <content select=".wc-sidebar"></content>
+                </wc-selection>
+            </div>
+            <div id="wc-content" class="padding">
+                <content select=".wc-content"></content>
+            </div>
+        </div>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-page', {
+                ready: function () {
+
+                }
+            });
+        })();
+    </script>
+</polymer-element>

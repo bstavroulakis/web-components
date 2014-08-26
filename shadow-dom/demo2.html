@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+		#test /deep/ span{
+			font-size:22px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+		<script>
+			var root1 = document.querySelector("#test").createShadowRoot();
+			root1.innerHTML = "<style>:host{border:1px solid #000;padding:10px;}span{color:blue}</style><div id='spooky'><span>Boooo, I'm a spooky Shadow DOM</span></div>";
+		</script>
+	</body>
+</html>

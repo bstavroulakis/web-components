@@ -1,0 +1,36 @@
+﻿<polymer-element name="wc-button" on-click="{{onClick}}">
+    <template>
+        <style>
+            .wp-button-wrap
+            {
+                border:1px solid #ffffff;
+                background-color:#215ea9;
+                color:#ffffff;
+                cursor:pointer;
+            }
+            .wp-button
+            {
+                padding-top:5px;
+                padding-bottom:5px;
+                padding-left:10px;
+                padding-right:10px;
+                display:block;
+            }
+        </style>
+        <button class="wp-button-wrap">
+            <span class="wp-button">
+                <content></content>
+            </span>
+        </button>
+        <div class="clearfix"></div>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-button', {
+                onClick: function () {
+                    this.fire("button-clicked");
+                }
+            });
+        })();
+    </script>
+</polymer-element>

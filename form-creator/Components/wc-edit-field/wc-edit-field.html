@@ -1,0 +1,116 @@
+﻿<polymer-element name="wc-edit-field" attributes="text,editMode">
+    <template>
+        <style>
+            .edit_input {
+                display:none;
+            }
+            #edit_icon
+            {
+                cursor:pointer;
+                display:none;
+            }
+            #edit_input
+            {
+                display:none;
+                float:left;
+            }
+            #no_input
+            {
+                font-size:12px;
+                color:#afafaf;
+                font-style:italic;
+                display: none;
+            }
+        </style>
+        <div id="edit_mode">
+            <input id="edit_input" class="fancy" type="text" value="{{text}}" />
+
+            <div id="show_input" on-click="{{showInputClick}}">
+                <div class="left"><div id="no_input">(no data)</div></div>
+                <div class="left">{{text}}</div>
+                <wc-icon id="edit_icon" class="padding_left left" icon="icon-pencil" size="12"></wc-icon>
+            </div>
+        </div>
+        
+        <div id="view_mode">
+            <div class="left">{{text}}</div>
+        </div>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-edit-field', {
+                text: "",
+                editMode: false,
+                editModeChanged: function () {
+                    var self = this;
+                    self.updateEvents();
+                },
+                textChanged: function () {
+                    var self = this;
+                    self.updateEvents();
+                },
+                showInputClick: function () {
+                    var self = this;
+                    self.enableEdit();
+                    self.$.edit_input.style.display = "block";
+                    self.$.edit_input.focus();
+                    var len = self.$.edit_input.value.length;
+                    if (len > 0)
+                        self.$.edit_input.size = (len);
+                },
+                updateEvents: function () {
+                    var self = this;
+                    if (!self.editMode) {
+                        self.$.edit_mode.style.display = "none";
+                        self.$.view_mode.style.display = "block";
+                        return;
+                    }
+
+                    self.$.edit_mode.style.display = "block";
+                    self.$.view_mode.style.display = "none";
+
+                    if (self.text == "")
+                        self.$.no_input.style.display = "block";
+                    else
+                        self.$.no_input.style.display = "none";
+
+                    self.shadowRoot.querySelector("#show_input").onmouseover = function (e) {
+                        self.$.edit_icon.style.display = "block";
+                    };
+                    self.shadowRoot.querySelector("#show_input").onmouseout = function (e) {
+                        self.$.edit_icon.style.display = "none";
+                    };
+
+                },
+                ready: function () {
+                    var self = this;
+                    self.updateEvents();
+                },
+                disableEdit: function () {
+                    var self = this;
+                    self.$.edit_input.style.display = "none";
+                    self.$.show_input.style.display = "block";
+                },
+                enableEdit: function () {
+                    var self = this;
+                    self.$.edit_input.style.display = "block";
+                    self.$.show_input.style.display = "none";
+
+                    self.$.edit_input.onkeyup = function (key) {
+                        if (key.keyCode == 13) {
+                            self.disableEdit();
+                            return;
+                        }
+                        var len = self.$.edit_input.value.length;
+                        if (len > 0)
+                            self.$.edit_input.size = (len);
+                    }
+                    self.$.edit_input.onblur = function () {
+                        self.text = self.$.edit_input.value;
+                        self.disableEdit();
+                    };
+                }
+            })
+        })();
+    </script>
+</polymer-element>

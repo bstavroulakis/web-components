@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+   <style>
+.block img, .block-image{
+   float:left;
+}
+.clear{
+   clear:both;
+}
+</style>
+</head>
+<body>
+
+<script id="template" type="text/html">
+  <li class="block">
+      <img style="width:16px" src="" />
+      <div class="block-name"></div>
+      <div class="clear"></div>
+      <div class="block-description"></div>
+   </li>
+</script>
+
+<ul id="list"></ul>
+
+<script>
+
+var names = ['Bill','John'];
+
+for(var key in names){
+   var name = names[key];
+   var tmpl = document.getElementById("template").cloneNode(true).innerHTML;
+   var tmplDOM = document.createElement('div');
+   tmplDOM.innerHTML = tmpl;
+
+   tmplDOM.querySelector("img").src = "img.png";
+   tmplDOM.querySelector(".block-name").innerHTML = name ;
+   tmplDOM.querySelector(".block-description").innerHTML = "Hi I'm " + name;
+   document.querySelector('#list').innerHTML += tmplDOM.innerHTML;
+}
+
+</script>
+
+</body>
+
+</html>

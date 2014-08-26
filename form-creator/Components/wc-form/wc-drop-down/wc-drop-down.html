@@ -1,0 +1,44 @@
+﻿<link rel="import" href="../wc-form-element.html" />
+
+<polymer-element name="wc-drop-down" extends="wc-form-element" attributes="description, options, question, editMode, pIndex">
+    <template>
+        <wc-edit-field editMode="{{editMode}}" text="{{question}}"></wc-edit-field><div class="left padding_left">:</div>
+        <select name="drop_down" class="full_width">
+            <template repeat="{{option, index in options}}">
+                <option value="{{option.title}}">{{option.title}}</option>
+            </template>
+        </select>
+        <div class="clearfix"></div>
+        <template if="{{editMode}}">
+            <template repeat="{{option, index in options}}">
+                <div data-index="{{index}}">
+                    <input class="left" type="checkbox" /><div class="left"><wc-edit-field editMode="{{editMode}}" text="{{option.title}}"></wc-edit-field> </div>
+                    <template if="{{editMode}}">
+                        <wc-icon on-click="{{removeElement}}" color="#afafaf" size="12" class="icon_remove left padding_left" icon="icon-remove"></wc-icon>
+                    </template>
+                </div>
+                <div class="clearfix"></div>
+            </template>
+            <wc-icon on-click="{{addOption}}" id="icon_add" class="pointer" icon="icon-add" size="16"></wc-icon>
+        </template>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-drop-down', {
+                removeElement: function (event, detail, sender) {
+                    var self = this;
+                    var parent = sender.parentNode;
+                    for (var i in self.options) {
+                        if (parent.getAttribute("data-index") == i)
+                            self.options.splice(i, 1);
+                    }
+                },
+                addOption: function () {
+                    var self = this;
+                    if (self.editMode)
+                        self.options.push({ title: "" });
+                }
+            });
+        })();
+    </script>
+</polymer-element>

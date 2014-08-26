@@ -1,0 +1,35 @@
+﻿::shadow .blue, ::shadow .blue h2, .blue, .blue /deep/ header,.blue /deep/ svg {
+    background-color: #578ebe;
+    color: #ffffff;
+    fill: #ffffff;
+}
+
+.blue a, .blue ::shadow  a, .blue /deep/ a {
+    color:#ffffff;
+}
+
+.text_blue {
+    color: rgb(20, 66, 130);
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+.text_white {
+    color: #ffffff;
+}
+
+::shadow .black, ::shadow .black h2, .black, .black /deep/ header,.black /deep/ svg {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    fill: #ffffff;
+}
+
+.black a, .black ::shadow  a, .black /deep/ a {
+    color:#ffffff;
+}
+
+::shadow .black_light, ::shadow .black_light h2, .black_light {
+    background-color: #3d3d3d;   
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Web Components</title>
+    <link href="Content/Site.css" rel="stylesheet" type="text/css" shim-shadowdom/>
+    <script src="Components/platform/platform.js"></script>
+    <link rel="import" href="Components/polymer/polymer.html" />
+    <link rel="import" href="Components/wc-popup/wc-popup.html" />
+    <link rel="import" href="Components/wc-icon/wc-icon.html" />
+    <link rel="import" href="Components/wc-header/wc-header.html" />
+    <link rel="import" href="Components/wc-page/wc-page.html" />
+    <link rel="import" href="Components/wc-el-thumb/wc-el-thumb.html" />
+    <link rel="import" href="Components/wc-form/wc-form.html" />
+    <link rel="import" href="Components/wc-selector/wc-selector.html" />
+    <link rel="import" href="Components/wc-button/wc-button.html" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="Content/Position.css" shim-shadowdom />
+    <link rel="stylesheet" href="Content/Color.css" shim-shadowdom />
+     </head>
+
+<body>
+    <wc-page>
+        <wc-header class="black" link="/">
+            <wc-icon color="#ffffff" class="left padding_right" icon="icon-home"></wc-icon>
+            <h2 class="left margin_0">Form Creator</h2>
+        </wc-header>
+        <div class="wc-sidebar">
+            <wc-selector>
+                <wc-el-thumb data-typeID="1" icon="paragraph-justify">Text</wc-el-thumb>
+                <wc-el-thumb data-typeID="2" icon="multiple-choice">Multiple Choice</wc-el-thumb>
+                <wc-el-thumb data-typeID="3" icon="single-choice">Single Choice</wc-el-thumb>
+                <wc-el-thumb data-typeID="4" icon="text-break">Text Line or Break</wc-el-thumb>
+                <wc-el-thumb data-typeID="5" icon="icon-menu">Drop Down</wc-el-thumb>
+            </wc-selector>
+        </div>
+        <div class="wc-content">
+            <wc-button class="import right">Import</wc-button>
+            <wc-button class="export right">Export</wc-button>
+            <wc-button class="right editor">Edit View</wc-button>
+            <wc-button class="right visitor">Visitor View</wc-button>
+            <wc-form></wc-form>
+            <div class="clearfix"></div>
+        </div>
+    </wc-page>
+
+    <wc-popup class="hidden wc_popup">
+        <textarea></textarea>
+    </wc-popup>
+
+    <input type="file" class="hidden" id="import_wallet" />
+
+    <script>
+        var wcForm = document.querySelector('wc-form');
+        wcForm.elements = [{ "description": "Desc1", "typeID": 3, "options": [{ "title": "option 1" }, { "title": "option 2"}], "question": "Test 1" }, { "description": "Desc2", "typeID": 2, "options": [{ "title": "option 1" }, { "title": "option 2"}], "question": "Test 2"}];
+        wcForm.formTitle = "Dynamic Form Creator";
+
+        document.querySelector(".import").addEventListener('button-clicked', function (el) {
+            document.querySelector("#import_wallet").click();
+        });
+
+        document.querySelector("#import_wallet").onchange = function () {
+            var fileReader = new FileReader();
+            fileReader.readAsText(document.querySelector('#import_wallet').files[0]);
+            fileReader.onload = function (e) {
+                var loadData = JSON.parse(e.target.result);
+                wcForm.elements = loadData;
+            };
+        };
+
+        document.querySelector(".export").addEventListener('button-clicked', function (el) {
+            document.querySelector(".wc_popup").innerHTML = (JSON.stringify(wcForm.elements));
+            document.querySelector(".wc_popup").style.display = "block";
+        });
+
+        document.querySelector(".editor").addEventListener('button-clicked', function (el) {
+            wcForm.editMode = true;
+        });
+
+        document.querySelector(".visitor").addEventListener('button-clicked', function (el) {
+            wcForm.editMode = false;
+        });
+
+        var wcSelector = document.querySelector('.wc-sidebar wc-selector');
+        wcSelector.addEventListener('wc-selected', function (el) {
+            var typeID = (el.detail.getAttribute("data-typeID"));
+            wcForm.elements.push({ description: "", typeID: typeID, options: [], question: "" });
+        });
+    </script>
+
+</body>
+</html>

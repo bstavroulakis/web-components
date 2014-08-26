@@ -1,0 +1,31 @@
+﻿<polymer-element name="wc-header" attributes="background color link">
+    <template>
+        <style>
+            header
+            {
+                display:inline-block;
+                width:100%;
+                box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 5px;
+            }
+            a {
+                text-decoration: none;
+                cursor:pointer;
+            }
+        </style>
+        <header class="padding">
+            <a href="{{link}}">
+                <content select="wc-icon"></content>
+                <content select="h2"></content>
+            </a>
+        </header>
+    </template>
+    <script>
+        (function () {
+            Polymer('wc-header', {
+                ready: function () {
+                    
+                }
+            })
+        })();
+    </script>
+</polymer-element>
