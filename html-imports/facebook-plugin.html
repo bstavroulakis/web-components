@@ -1,0 +1,19 @@
+<template id="fb-template">
+    <iframe frameborder="0" src='http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/DotNetWeekly&appId=163535247045000'></iframe>
+</template>
+<style>
+    iframe{
+        border:none;
+    }
+</style>
+<script>
+    var FBLikeProto = Object.create(HTMLElement.prototype);
+    FBLikeProto.attachedCallback = function () {
+        this.createShadowRoot();
+        var link = document.querySelector('link[rel=import]');
+        this.shadowRoot.innerHTML = link.import.getElementById("fb-template").cloneNode(true).innerHTML;
+    }
+    var FBLike = document.registerElement('fb-like', {
+        prototype: FBLikeProto
+    });
+</script>
